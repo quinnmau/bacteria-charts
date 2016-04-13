@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bacteria</title>
+        <link href="css/main.css" type="text/css" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="js/main.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="plot1" class="graph">
+                        
+                    </div>
+                    <p>
+                        The graph above shows the most effective drug for each bacteria in the dataset. The visual encodings I used here are position along a common scale, a small scale, and the opacity and hue of each circle to highlight which drug is the most effective. I chose to use position along a common scale with bubbles because the exact value for each bubble isn’t as important as the underlying question of which bubble has the lowest position (relative to the x-axis) in each column, where each column represents a different bacteria. I used hue because using hue as a perceptual tool is very effective for categorizing nominal data (in this case the three different drug strains). In tandem with hue, I used the opacity of each circle to actually express if that particular circle had the lowest value for its column. The difference between two nearly opaque circles and one completely saturated circle in each column makes it very easy to pick out the saturated circle which is the circle that is intended to be highlighted. A small range of numbers on the y-axis was used for the same reason bubbles were used with position; that is because the exact value of the bubble isn’t as important as knowing if it is the lowest bubble or not. In having all the bubbles on one chart, besides knowing which drug was the most effective for each individual bacteria, you can also see how many bacteria each drug was the most effective on based off how much of each of the three colors you see which is something that would be much harder to get out of staring at tubular data.       
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="plot2">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="plot3">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="plot4">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
