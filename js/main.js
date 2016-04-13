@@ -8,10 +8,7 @@ $(function() {
         console.log(data);
         buildGraph1(data, 'plot1');
         getDataBox2('Penicilin', data);
-        formatTrace2('Penicilin', data);
-        buildBarGraph2(data, 'plot2', 'Penicilin');
-        buildBarGraph2(data, 'plot3', "Streptomycin ");
-        buildBarGraph2(data, 'plot4', 'Neomycin');
+        buildBarGraph3(data, 'plot2');
     });
     
     //puts data into an object
@@ -112,16 +109,41 @@ $(function() {
                         return '#F51BDC';
                     }
                 })
-            },
-            //name needs to be either 'positive' or 'negative' depending on
-            //the given bacterias color/stain
-            name: [function() {
-                if (trace.marker.color == '#501DA6') {
-                    return 'Positive';
-                } else {
-                    return 'Negative';
-                }
-            }]
+            }
+        };
+        return trace;
+    }
+    
+    function formatTrace3(drugName, data) {
+        var dataBox = getDataBox1(drugName, data);
+        var keys = Object.keys(dataBox);
+        //sorts keys first by stain then by alphabetical order
+        keys.sort(function(a, b) {
+            var obj1 = dataBox[a];
+            var obj2 = dataBox[b];
+            if (obj1["stain"] === obj2["stain"]) {
+                return a.localeCompare(b);
+            } else {
+                return obj1["stain"].localeCompare(obj2["stain"]);
+            }
+        });
+        // var color = '';
+        // if (drugName == 'Penicilin') {
+        //     color = '#1F7AB8';
+        // } else if (drugName == 'Neomycin') {
+        //     color = 'green';
+        // } else {
+        //     color = 'orange';
+        // }
+        var values = keys.map(function(d) {
+            var obj = dataBox[d];
+            return obj.mic;
+        });
+        var trace = {
+            x: keys,
+            y: values,
+            type: 'bar',
+            name: drugName
         };
         return trace;
     }
@@ -145,26 +167,53 @@ $(function() {
         Plotly.newPlot(plot, traces, layout);
     }
     
-    //builds second set of graphs
-    function buildBarGraph2(data, plot, drugName) {
-        var traces = [formatTrace2(drugName, data)];
+    function buildBarGraph3(data, plot) {
+        var traces = [formatTrace3('Penicilin', data), formatTrace3("Streptomycin ", data), formatTrace3('Neomycin', data)];
         var layout = {
-            title: drugName,
-            margin: {
-                b: 120
-            },
-            xaxis: {
-                title: 'Bacteria'
-            },
+            shapes: [
+                {
+                    type: 'rect',
+                    xref: 'paper',
+                    yref: 'paper',
+                    x0: 0,
+                    y0: 0,
+                    x1: 0.5625,
+                    y1: 1,
+                    fillcolor: '#F51BDC',
+                    opacity: 0.2,
+                    line: {
+                        width: 0
+                    },
+                }, 
+                {
+                    type: 'rect',
+                    xref: 'paper',
+                    yref: 'paper',
+                    x0: 0.5626,
+                    y0: 0,
+                    x1: 1,
+                    y1: 1,
+                    fillcolor: '#501DA6',
+                    opacity: 0.2,
+                    line: {
+                        width: 0
+                    },
+                }
+            ],
             yaxis: {
                 title: 'MIC (Drug Effectiveness)',
-                range: [0, 40]
+                range: [0, 20]
             },
-            //legend is visible but incorrect. needs to be a key for 
-            //stain 'positive' and stain 'negative'
-            showlegend: true
+            xaxis: {
+                title: 'Bacteria'  
+            },
+            //title: drugName,
+            showlegend: true,
+            margin: {
+                    b: 120
+                }
         };
-        Plotly.newPlot(plot, traces, layout);
+        Plotly.newPlot(plot, traces, layout, {staticPlot: true});
     }
     
 });
