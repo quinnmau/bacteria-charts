@@ -48,6 +48,7 @@ $(function() {
             y: values,
             type: 'bar',
             marker: {
+                //purple if positive, pink if negative
                 color: keys.map(function(d) {
                     var obj = dataBox[d];
                     if (obj.stain == "positive") {
@@ -72,6 +73,7 @@ $(function() {
         return trace;
     }
     
+    //builds graph 3, 4, and 5
     function buildbargraph2(data, plot, drugName) {
         var traces = [formatTrace2(drugName, data)];
         var layout = {
@@ -85,7 +87,7 @@ $(function() {
                 range: [0, 25]
             },
             margin: {
-                b: 120
+                b: 60
             }
         }
         Plotly.newPlot(plot, traces, layout, {staticPlot: true});
@@ -111,8 +113,11 @@ $(function() {
             marker: {
                 opacity: keys.map(function(d) {
                     var obj = dataBox[d];
+                    //if neomycin is lowest value in column
                     if ((obj.neomycin < obj.streptomycin && obj.neomycin < obj.penicilin && drugName == 'Neomycin') || 
+                    //if streptomycin is lowest value in column
                     (obj.streptomycin < obj.neomycin && obj.streptomycin < obj.penicilin && drugName == "Streptomycin ") || 
+                    //if penicilin is lowest value in column
                     (obj.penicilin < obj.streptomycin && obj.penicilin < obj.neomycin && drugName == 'Penicilin')) {
                         return 1.0;
                     } else {
@@ -144,6 +149,7 @@ $(function() {
         Plotly.newPlot(plot, traces, layout, {staticPlot: true});
     }
     
+    //formats data for buildbargraph3
     function formatTrace3(drugName, data) {
         var dataBox = getDataBox1(drugName, data);
         var keys = Object.keys(dataBox);
@@ -157,14 +163,6 @@ $(function() {
                 return obj1["stain"].localeCompare(obj2["stain"]);
             }
         });
-        // var color = '';
-        // if (drugName == 'Penicilin') {
-        //     color = '#1F7AB8';
-        // } else if (drugName == 'Neomycin') {
-        //     color = 'green';
-        // } else {
-        //     color = 'orange';
-        // }
         var values = keys.map(function(d) {
             var obj = dataBox[d];
             return obj.mic;
@@ -178,10 +176,12 @@ $(function() {
         return trace;
     }
     
+    //builds bargraph3
     function buildBarGraph3(data, plot) {
         var traces = [formatTrace3('Penicilin', data), formatTrace3("Streptomycin ", data), formatTrace3('Neomycin', data)];
         var layout = {
             shapes: [
+                //pink highlight around gram negative bacteria
                 {
                     type: 'rect',
                     xref: 'paper',
@@ -196,6 +196,7 @@ $(function() {
                         width: 0
                     },
                 }, 
+                //purple highlight around gram positive bacteria
                 {
                     type: 'rect',
                     xref: 'paper',
@@ -217,6 +218,9 @@ $(function() {
             },
             xaxis: {
                 title: 'Bacteria'  
+            },
+            margin: {
+                b: 120
             }
         };
         Plotly.newPlot(plot, traces, layout, {staticPlot: true});
