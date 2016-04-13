@@ -98,7 +98,6 @@ $(function() {
             x: keys,
             y: values,
             type: 'bar',
-            name: drugName,
             marker: {
                 color: keys.map(function(d) {
                     var obj = dataBox[d];
@@ -108,7 +107,14 @@ $(function() {
                         return '#F51BDC';
                     }
                 })
-            }
+            },
+            name: [function() {
+                if (trace.marker.color == '#501DA6') {
+                    return 'Positive';
+                } else {
+                    return 'Negative';
+                }
+            }]
         };
         return trace;
     }
@@ -144,7 +150,8 @@ $(function() {
             yaxis: {
                 title: 'MIC (Drug Effectiveness)',
                 range: [0, 40]
-            }
+            },
+            showlegend: true
         };
         Plotly.newPlot(plot, traces, layout);
     }
