@@ -217,12 +217,7 @@ $(function() {
             },
             xaxis: {
                 title: 'Bacteria'  
-            },
-            //title: drugName,
-            showlegend: true,
-            margin: {
-                    b: 120
-                }
+            }
         };
         Plotly.newPlot(plot, traces, layout, {staticPlot: true});
     }

@@ -9,3 +9,11 @@ body {
 h1 {
     text-align: center;
 }
+
+.custom-legend {
+    width: 90px;
+}
+
+#sdf {
+    float: right;
+}
