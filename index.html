@@ -15,37 +15,44 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div id="plot1" class="graph">
-                        
-                    </div>
-                    <p>
-                        The graph above shows the most effective drug for each bacteria in the dataset. The visual encodings I used here are position along a common scale, a small scale, and the opacity and hue of each circle to highlight which drug is the most effective. I chose to use position along a common scale with bubbles because the exact value for each bubble isn’t as important as the underlying question of which bubble has the lowest position (relative to the x-axis) in each column, where each column represents a different bacteria. I used hue because using hue as a perceptual tool is very effective for categorizing nominal data (in this case the three different drug strains). In tandem with hue, I used the opacity of each circle to actually express if that particular circle had the lowest value for its column. The difference between two nearly opaque circles and one completely saturated circle in each column makes it very easy to pick out the saturated circle which is the circle that is intended to be highlighted. A small range of numbers on the y-axis was used for the same reason bubbles were used with position; that is because the exact value of the bubble isn’t as important as knowing if it is the lowest bubble or not. In having all the bubbles on one chart, besides knowing which drug was the most effective for each individual bacteria, you can also see how many bacteria each drug was the most effective on based off how much of each of the three colors you see which is something that would be much harder to get out of staring at tubular data.       
-                    </p>
+                <div id="plot1" class="center-block">
+                    
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xs-12 col-sm-4">
+                    The graph above shows the most effective drug for each bacteria in the dataset. The visual encodings I used here are position along a common scale, a small scale, and the opacity and hue of each circle to highlight which drug is the most effective. I chose to use position along a common scale with bubbles because the exact value for each bubble isn’t as important as the underlying question of which bubble has the lowest position (relative to the x-axis) in each column, where each column represents a different bacteria.
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    I used hue because using hue as a perceptual tool is very effective for categorizing nominal data (in this case the three different drug strains). In tandem with hue, I used the opacity of each circle to actually express if that particular circle had the lowest value for its column. The difference between two nearly opaque circles and one completely saturated circle in each column makes it very easy to pick out the saturated circle which is the circle that is intended to be highlighted. A small range of numbers on the y-axis was used for the same
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    reason bubbles were used with position; that is because the exact value of the bubble isn’t as important as knowing if it is the lowest bubble or not. In having all the bubbles on one chart, besides knowing which drug was the most effective for each individual bacteria, you can also see how many bacteria each drug was the most effective on based off how much of each of the three colors you see which is something that would be much harder to get out of staring at tubular data. 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-4">
                     <div id="plot2">
                         
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-12 col-lg-4">
                     <div id="plot3">
                         
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
+                <div class="col-md-12 col-lg-4">
                     <div id="plot4">
                         
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div id="plot5">
+                    
+                </div>
+            </div>
+        </div><!-- end container -->           
     </body>
 
 </html>
