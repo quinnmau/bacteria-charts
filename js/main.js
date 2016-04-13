@@ -7,7 +7,6 @@ $(function() {
     d3.csv('data/antibiotics_data.csv', function(error, data) {
         console.log(data);
         buildGraph1(data, 'plot1');
-        getDataBox2('Penicilin', data);
         buildBarGraph3(data, 'plot2');
         buildbargraph2(data, 'plot3', 'Penicilin');
         buildbargraph2(data, 'plot4', 'Neomycin');
@@ -24,24 +23,6 @@ $(function() {
                 penicilin: d['Penicilin'],
                 neomycin: d['Neomycin'],
                 streptomycin: d["Streptomycin "]
-            }
-        });
-        return dataBox;
-    }
-    
-    function getDataBox2(drugName, data) {
-        var dataBox = {};
-        var data1 = data;
-        data1.sort(function(a, b) {
-            if (a["Gram Staining "] === b["Gram Staining "]) {
-                return a["Bacteria "].localeCompare(b["Bacteria "]);
-            }
-            return a["Gram Staining "].localeCompare(b["Gram Staining "]);
-        });
-        data.forEach(function(d) {
-            dataBox[d[drugName]] = {
-                bacteria: d["Bacteria "],
-                stain: d["Gram Staining "]
             }
         });
         return dataBox;
