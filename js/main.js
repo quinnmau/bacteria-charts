@@ -3,6 +3,7 @@
 //when the document is ready
 $(function() {
     
+    //makes an asynchronous request to get the data then builds respective charts
     d3.csv('data/antibiotics_data.csv', function(error, data) {
         console.log(data);
         buildGraph1(data, 'plot1');
@@ -13,6 +14,7 @@ $(function() {
         buildBarGraph2(data, 'plot4', 'Neomycin');
     });
     
+    //puts data into an object
     function getDataBox1(drugName, data) {
         var dataBox = {};
         data.forEach(function(d) {
@@ -27,6 +29,7 @@ $(function() {
         return dataBox;
     }
     
+    //formats object from getDataBox so plotly can graph it in buildgraph1
     function formatTrace1(drugName, data) {
         var dataBox = getDataBox1(drugName, data);
         var keys = Object.keys(dataBox);
@@ -77,9 +80,11 @@ $(function() {
         return dataBox;
     }
     
+    //formats object from getDataBox1 to be passed to buildbargraph2
     function formatTrace2(drugName, data) {
         var dataBox = getDataBox1(drugName, data);
         var keys = Object.keys(dataBox);
+        //sorts keys first by stain then by alphabetical order
         keys.sort(function(a, b) {
             var obj1 = dataBox[a];
             var obj2 = dataBox[b];
@@ -108,6 +113,8 @@ $(function() {
                     }
                 })
             },
+            //name needs to be either 'positive' or 'negative' depending on
+            //the given bacterias color/stain
             name: [function() {
                 if (trace.marker.color == '#501DA6') {
                     return 'Positive';
@@ -119,6 +126,7 @@ $(function() {
         return trace;
     }
     
+    //builds the first graph
     function buildGraph1(data, plot) {
         var traces = [formatTrace1('Penicilin', data), formatTrace1("Streptomycin ", data), formatTrace1('Neomycin', data)];
         var layout = {
@@ -137,6 +145,7 @@ $(function() {
         Plotly.newPlot(plot, traces, layout);
     }
     
+    //builds second set of graphs
     function buildBarGraph2(data, plot, drugName) {
         var traces = [formatTrace2(drugName, data)];
         var layout = {
@@ -151,6 +160,8 @@ $(function() {
                 title: 'MIC (Drug Effectiveness)',
                 range: [0, 40]
             },
+            //legend is visible but incorrect. needs to be a key for 
+            //stain 'positive' and stain 'negative'
             showlegend: true
         };
         Plotly.newPlot(plot, traces, layout);
