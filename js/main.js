@@ -6,12 +6,27 @@ $(function() {
     //makes an asynchronous request to get the data then builds respective charts
     d3.csv('data/antibiotics_data.csv', function(error, data) {
         console.log(data);
+        populateTable(data);
         buildGraph1(data, 'plot1');
         buildBarGraph3(data, 'plot2');
         buildbargraph2(data, 'plot3', 'Penicilin');
         buildbargraph2(data, 'plot4', 'Neomycin');
         buildbargraph2(data, 'plot5', "Streptomycin ");
     });
+    
+    function populateTable(data) {
+        var table = $('#my-table');
+        data.forEach(function(d) {
+            var row = $('<tr></tr>');
+            var obj = d;
+            for (var key in obj) {
+                var cell = $('<td></td>');
+                cell.text(obj[key]);
+                row.append(cell);
+            }
+            table.append(row);
+        });
+    }
     
     //puts data into an object
     function getDataBox1(drugName, data) {
