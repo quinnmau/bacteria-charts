@@ -99,7 +99,7 @@ $(function() {
             },
             yaxis: {
                 title: 'MIC (Drug Effectiveness)',
-                range: [0, 25]
+                type: 'log'
             },
             margin: {
                 b: 60
@@ -158,7 +158,7 @@ $(function() {
             },
             yaxis: {
                 title: 'MIC (Drug Effectiveness)',
-                range: [-1, 12]
+                type: 'log'
             }
         };
         Plotly.newPlot(plot, traces, layout, {staticPlot: true});
@@ -229,7 +229,7 @@ $(function() {
             ],
             yaxis: {
                 title: 'MIC (Drug Effectiveness)',
-                range: [0, 20]
+                type: 'log'
             },
             xaxis: {
                 title: 'Bacteria'  
