@@ -99,7 +99,10 @@ $(function() {
             },
             yaxis: {
                 title: 'MIC (Drug Effectiveness)',
-                type: 'log'
+                type: 'log',
+                tickmode: 'array',
+                tickvals: [-3, -2, -1, 0, 1, 2, 3],
+                range: [-3.2, 3]
             },
             margin: {
                 b: 60
